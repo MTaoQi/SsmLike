@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ay.dao.UserDao">
+    <!--    <cache-ref namespace="com.ay.dao.UserDao"/>-->
+    <resultMap id="userMap" type="com.ay.model.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="account" column="account"/>
+    </resultMap>
+    <!-- sql代码块 -->
+    <sql id="table_column">
+        id,
+        name,
+        account
+    </sql>
+    <!--   与 UserDao查询用户方法 find() 对应sql语句-->
+    <select id="find" resultMap="userMap" parameterType="String">
+        select
+        <include refid="table_column"/>
+        from user
+        <where>
+            id = #{id}
+        </where>
+    </select>
+    <!-- 添加 -->
+    <insert id="insertUser" parameterType="String" >
+        INSERT INTO user(id, name, account)
+        VALUES (#{id}, #{name}, #{account})
+    </insert>
+
+<!--    &lt;!&ndash; 删除 &ndash;&gt;-->
+<!--    <delete id="deleteUser" parameterType="varchar">-->
+<!--        DELETE-->
+<!--        FROM user-->
+<!--        WHERE id = #{value}-->
+<!--    </delete>-->
+
+<!--    &lt;!&ndash; 修改 &ndash;&gt;-->
+<!--    <update id="updateUser" parameterType="com.ay.model.User">-->
+<!--        UPDATE user-->
+<!--        SET name=#{name}-->
+<!--        WHERE id = #{id}-->
+<!--    </update>-->
+
+
+<!--    &lt;!&ndash; 查询 &ndash;&gt;-->
+<!--    <select id="queryAllUser" resultMap="userMap">-->
+<!--        &lt;!&ndash; &ndash;&gt;-->
+<!--        SELECT * FROM user-->
+<!--    </select>-->
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ay.dao.DbUserDao">
+    <resultMap id="DbUserMap" type="com.ay.model.DbUser">
+        <id property="user_id" column="id"/>
+        <result property="user_name" column="username"/>
+        <result property="user_pass" column="password"/>
+    </resultMap>
+    <!-- 查询用户 -->
+    <select id="findUser" parameterType="String" resultMap="DbUserMap">
+        select *
+        from dbuser
+        where username = #{username}
+          and password = #{password}
+
+    </select>
+</mapper>
